@@ -66,7 +66,7 @@ Preprocessing of 3-D medical images and extraction of vascular parameters.
 ## Setup
 
 ```bash
-conda create -n vmtk python 3.6.9
+conda create -n vmtk python==3.6.9
 conda active vmtk
 conda install -c vmtk vtk itk vmtk
 pip install itk scikit-image nibabel xlwt xlrd xlutils vtk tqdm
