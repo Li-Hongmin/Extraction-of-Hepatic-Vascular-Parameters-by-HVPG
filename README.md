@@ -69,12 +69,14 @@ Install basic dependencies.
 ```bash
 sudo apt-get update
 sudo apt-get install libosmesa6-dev
+
 ```
 
 If you don't have conda, I recommand the Mambaforge.
 ```bash
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
 bash Mambaforge-$(uname)-$(uname -m).sh
+source /home/gitpod/.bashrc
 ```
 
 
