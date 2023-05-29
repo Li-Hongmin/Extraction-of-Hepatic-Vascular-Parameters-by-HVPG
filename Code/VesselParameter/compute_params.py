@@ -148,7 +148,7 @@ def insert_data(file_path: str, patient_id: str, params):
     workbook.save(file_path)
 
 
-def compute_params(nifti_file: str, mesh_file: str, centerlines_file: str):
+def compute_params(nifti_file: str, mesh_file: str, centerlines_file: str, feature_file_path: str):
     """
     Parameter calculation function interface
     Args:
@@ -169,7 +169,9 @@ def compute_params(nifti_file: str, mesh_file: str, centerlines_file: str):
     spacing = image_data.GetSpacing()
     unit_vol = spacing[0] * spacing[1] * spacing[2] * 0.001
     npy_data = vtk_to_numpy(image_data.GetPointData().GetScalars())
+    print(npy_data.shape)
     vol = np.sum(npy_data > 0) * unit_vol
+    print('Vascular volume: ', vol)
     # Other parameters
     centerline_reader = vtk.vtkPolyDataReader()
     centerline_reader.SetFileName(centerlines_file)
@@ -232,6 +234,11 @@ def compute_params(nifti_file: str, mesh_file: str, centerlines_file: str):
         for i, val in enumerate(vals):
             total_length += val / cell_label[key][i]
     # Backbone length
+    print("len(cell_length): ", len(cell_length))
+    print("len(euclid_length): ", len(euclid_length))
+    print("len(cell_label): ", len(cell_label))
+
+    print("len(cell_length[0]): ", len(cell_length[0]))
     main_branch_length = cell_length[0][0]
     # Branch length
     mean_branch_length = (total_length - main_branch_length) / len(cell_length.values())
@@ -295,25 +302,28 @@ def compute_params(nifti_file: str, mesh_file: str, centerlines_file: str):
     median_main_branch=np.median(main_branch_param, axis=0)
     median_branch_param= np.median(branches_params, axis=0)
     # Write parameters
-    xls_file_dir = os.path.join(nifti_file, '../../Features/')
-    if not os.path.exists(xls_file_dir):
-        os.makedirs(xls_file_dir)
-    xls_file=os.path.join(xls_file_dir,'vessel_params.xls')
-    if not os.path.exists(xls_file):
-        create_xls(xls_file)
+    # xls_file_dir = os.path.join(nifti_file, '../../Features/')
+    # xls_file_dir = os.path.join(nifti_file, '../../Features/')
+    # os.makedirs(xls_file_dir, exist_ok=True)
+
+    # xls_file = os.path.join(xls_file_dir, 'vessel_params.xls')
     params = [vol, total_length,main_branch_length, mean_branch_length, main_branch_tuotorsity,
               mean_branches_tuotorsity, main_curvature, branches_curvature,
               median_main_branch[0], median_branch_param[0], median_main_branch[1], median_branch_param[1],
               median_main_branch[2], median_branch_param[2],
               median_main_branch[3], median_branch_param[3],
               terminal_nodes,branch_nodes,branches]
+    print(params)
     # Get the file
+    xls_file = feature_file_path
+    if not os.path.exists(xls_file):
+        create_xls(xls_file)
     patient_id=os.path.split(nifti_file)[-1].split('.')[0]
     insert_data(xls_file, patient_id, params)
 
-
 if __name__ == '__main__':
-    nifti_file = 'D:/source_code/VGM_HVPG/DemoData/abdominal_aorta.nii.gz'
-    mesh_file = 'D:/source_code/VGM_HVPG/ProcessedData/abdominal_aorta.vtk'
-    centerlines_file = 'D:/source_code/VGM_HVPG/ProcessedData/abdominal_aorta_centerlines.vtk'
-    compute_params(nifti_file, mesh_file, centerlines_file)
+    nifti_file = '../../DemoData/abdominal_aorta.nii.gz'
+    mesh_file = '../../ProcessedData/abdominal_aorta.vtk'
+    centerlines_file = '../../ProcessedData/abdominal_aorta_centerlines.vtk'
+    feature_file_path = '../../Features/abdominal_aorta_features.xls'
+    compute_params(nifti_file, mesh_file, centerlines_file, feature_file_path)

@@ -308,11 +308,11 @@ def main(file_dir: str, save_dir: str = None):
             nifti_file_paths.append(file_paths[0])
         else:
             if ind == 0:
-                print('No file corresponding to hepatic vein found！')
+                print('No file corresponding to hepatic vein found!')
             elif ind == 1:
-                print('No file corresponding to the portal vein found！')
+                print('No file corresponding to the portal vein found!')
             else:
-                print('No file corresponding to hepatic artery found！')
+                print('No file corresponding to hepatic artery found!')
     p.close()
     p.join()
     file_path_list=[]
@@ -323,6 +323,6 @@ def main(file_dir: str, save_dir: str = None):
 
 
 if __name__ == '__main__':
-    files = 'D:\\source_code\\VGM_HVPG\\DemoData'
+    files = '../../DemoData'
     main(files)
     # compute_centerlines(file_0)

@@ -61,39 +61,28 @@ The following is one of my predicting results.
 
 # Extraction of Hepatic Vascular Parameters
   
-## Dependencies
-
-python3.6.9. The used third-party libraries: vmtk, vtk, itk, scikit-image, nibabel, xlwt, xlrd, xlutils.
-
-*Note: 
-Nibabel is used to rewrite head information of nifti files.
-xlwt, xlrd, and xlutils are used to read, write, and copy excel files. 
-Itk, vtk read nifti files, reading and writing 3-D model files(*vtk); 
-vmtk is used to calculate vascular centerline. 
+Preprocessing of 3-D medical images and extraction of vascular parameters.
 
 ## Setup
-        
-conda create -n vmtk python 3.6.9
-conda active vmtk" 
-conda install -c vmtk vtk itk vmtk
 
+```bash
+conda create -n vmtk python 3.6.9
+conda active vmtk
+conda install -c vmtk vtk itk vmtk
+pip install itk scikit-image nibabel xlwt xlrd xlutils vtk tqdm
+```
 ## Run
 
 #### Use the source code
-        
+
 *Command "conda activate vmtk", to switch to the vmtk environment and enter the directory of the source code. 
-*Command "python compute_vessel_params.py../../DemoData" and wait until completion.  Generated 3-D model files and the corresponding centerline files will be stored in the directory "ProcessedData". Parameters will be stored in the directory "Features".
+```bash
+conda activate vmtk
+```
 
-## Results
-
-1. Model files
-        
-Generated 3-D files include model files of vessels and the corresponding centerline files. After running, they will be stored in the directory of "ProcessedData".
-
-2. Calculation of  parameter index
-        
-Calculated parameter indexes will be stored in excel file in the directory "Features".
-For instance, ![](assets/README-99dd089b.png)
-
-* All parameters are stored in an excel file.
+To use the source code, you need to modify the parameters in the script and run the script. nifti_file_folder is the directory of the nifti files. The generated 3-D files include model files of vessels and the corresponding centerline files. After running, they will be stored in the directory of "ProcessedData". 
+The features of vessels will be stored in excel file in the directory "Features". 
+```bash
+python extract_feature.py
+```
 
