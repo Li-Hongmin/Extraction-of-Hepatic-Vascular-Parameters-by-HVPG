@@ -82,7 +82,7 @@ If you use conda, just replace mamba to conda.
 ```bash
 mamba create -n vmtk python==3.6.9
 mamba activate vmtk
-mamba install -c vmtk vtk itk
+mamba install -c vmtk vtk itk vmtk
 pip install itk scikit-image nibabel xlwt xlrd xlutils vtk tqdm
 ```
 
