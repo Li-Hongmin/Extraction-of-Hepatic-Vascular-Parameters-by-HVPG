@@ -80,8 +80,11 @@ pip install itk scikit-image nibabel xlwt xlrd xlutils vtk tqdm
 conda activate vmtk
 ```
 
-To use the source code, you need to modify the parameters in the script and run the script. nifti_file_folder is the directory of the nifti files. The generated 3-D files include model files of vessels and the corresponding centerline files. After running, they will be stored in the directory of "ProcessedData". 
+The input files are only nifti files. This code can be used to extract the parameters of the hepatic vessels. Please place your nifti files in the directory. Our default directory is "DemoData". You can modify the directory in the script.
+
+nifti_file_folder is the directory of the nifti files. The generated 3-D files include model files of vessels and the corresponding centerline files. After running, they will be stored in the directory of "ProcessedData". 
 The features of vessels will be stored in excel file in the directory "Features". 
+
 ```bash
 python extract_feature.py
 ```
