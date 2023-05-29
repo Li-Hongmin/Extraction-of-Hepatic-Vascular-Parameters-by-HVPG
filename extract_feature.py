@@ -34,6 +34,8 @@ nifti_file_list = [nifti_file_folder + "/" + file for file in os.listdir(nifti_f
 #         compute_feature(nifti_file)
 
 # use multiprocessing to compute the feature
+print("Use multiprocessing to compute the feature of the nifti file")
+print("this may take a long time")
 from multiprocessing import Pool
 pool = Pool()
 pool.map(compute_feature, nifti_file_list)
