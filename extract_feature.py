@@ -24,7 +24,7 @@ def compute_feature(nifti_file):
 
 
 # list all the nifti file with suffix .nii.gz
-nifti_file_folder = "Case5"
+nifti_file_folder = "DemoData"
 nifti_file_list = [nifti_file_folder + "/" + file for file in os.listdir(nifti_file_folder) if file.endswith(".nii.gz")]
 
 # # use for loop to compute the feature
