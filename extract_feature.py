@@ -19,7 +19,6 @@ def compute_feature(nifti_file):
     compute_centerlines(nifti_file, processed_data_path, prefix)
     mesh_file = processed_data_path + "/" + prefix + ".vtk"
     centerlines_file = processed_data_path + "/" + prefix + "_centerlines.vtk"
-    feature_file_path = processed_data_path + "/" + "feature.xls"
     compute_params(nifti_file, mesh_file, centerlines_file, feature_file_path)
 
 
