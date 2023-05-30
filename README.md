@@ -1,65 +1,7 @@
-# Segmentation Network (2.5D)
-
-The model is based on UNet with modifications of the dimension with shape of h x w x 5.
-
-## Dependencies
-
-Ubuntu 20.04.3, python 3.6, CUDA 11.0, anaconda (4.10.1),nibabel (3.2.1), SimpleITK (2.1.1), numpy (1.19.5), scikit-image (0.17.2), scipy (1.5.2), pytorch (1.7.1), tqdm(4.46.0), opencv-python(4.46.0.66), itk(5.2.0), tensorboard(2.5.0)
-
-## Setup
-
-```bash
-conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -c pytorch
-pip install nibabel==3.2.1
-pip install tensorboard==2.5.0
-pip install simpleITK==5.2.0
-...
-```
-
-## Data
-
-##### Prepare data
-
-1. Annotate your data and convert to nifity format files (.nii/.nii.gz).
-
-   example(hepatic vein):
-
-   <img src="./DemoData/img1.png" style="zoom:50%;" />
-
-2. Put the original image and the corresponding labels into two folders to prepare for preprocessing and training.
-
-##### Preprocess data
-
-Preprocess data into numpy files required by the network: modify the corresponding path parameters in the `preprocess.py` and run it by your environment.
-
-You can train better network models by modifying these preprocessing parameters:
-
- `*spacing*, *shape*, *data_type*(can be modified by yourself)`
-
-## Run
-
-#### Train
-
-  run `train.py`
-
-  *You need check and set the parameters: CUDA_VISIBLE_DEVICES, dir_checkpoint, input_path, label_path, batchsize, lr, model_type, channels, classes...
-
-#### Test
-
-  run `predict.py`
-
-  *You need to check and set the parameters: CUDA_VISIBLE_DEVICES, model_path, threshold, model_type, channels, classes, data_type, ornt, spacing, shape(according to your preprocess parameters), img_nii_dir, pred_dir...
-
-## Results
-
-The following is one of my predicting results.
-
-<img src="./DemoData/img2.png" style="zoom:50%;" />
-
-<img src="./DemoData/img3.png" style="zoom:75%;" />
-
-
 # Extraction of Hepatic Vascular Parameters
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Li-Hongmin/Extraction-of-Hepatic-Vascular-Parameters-by-HVPG)
+
   
 Preprocessing of 3-D medical images and extraction of vascular parameters.
 
