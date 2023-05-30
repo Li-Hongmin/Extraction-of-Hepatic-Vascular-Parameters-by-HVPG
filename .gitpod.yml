@@ -2,10 +2,34 @@
 tasks:
   - name: Install denpendencies
     before: sudo apt-get update -y && sudo apt-get install -y libosmesa6-dev
-    init: curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh" && bash Mambaforge-$(uname)-$(uname -m).sh -b -p $HOME/mambaforge && echo 'export PATH="$HOME/mambaforge/bin:$PATH"' >> $HOME/.bashrc && source $HOME/.bashrc && mamba init && source $HOME/.bashrc
-    command: mamba create -n vmtk python==3.6.9 -y && mamba activate vmtk && mamba install -y -c vmtk vtk itk vmtk && pip install itk scikit-image nibabel xlwt xlrd xlutils vtk tqdm && python fixbug_vmtk.py && echo "......................................" && echo "All denpendencies are installed successfully!!"
+    init: |
+      (
+        # set -e # Tells bash to immediately exit on failure off a command
+        curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+        bash Mambaforge-$(uname)-$(uname -m).sh -b -p $HOME/mambaforge
+        echo 'export PATH="$HOME/mambaforge/bin:$PATH"' >> $HOME/.bashrc 
+        source $HOME/.bashrc 
+        mamba init 
+        source $HOME/.bashrc
+        set -e # Tells bash to immediately exit on failure off a command
+        mamba create -n vmtk python==3.6.9 -y 
+        mamba activate vmtk 
+        mamba install -y -c vmtk vtk itk vmtk 
+        pip install itk scikit-image nibabel xlwt xlrd xlutils vtk tqdm 
+        python fixbug_vmtk.py 
+        echo "......................................"
+        echo "All denpendencies are installed successfully!!"
+      )
     
+    # command: |
+    #   (
 
+    #     )
+  # - name: demo
+  #   init: gp sync-await bundle # wait for the above 'init' to finish
+  #   command: |
+  #     mamba activate vmtk
+  #     python extract_feature.py
   # - name: try demo tasks.
   #   init: mamba activate vmtk
   #   command: python extract_feature.py
