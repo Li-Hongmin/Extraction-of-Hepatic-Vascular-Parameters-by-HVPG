@@ -6,6 +6,11 @@ tasks:
       (
         # set -e # Tells bash to immediately exit on failure off a command
         curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+        
+      )
+    
+    command: |
+      (
         bash Mambaforge-$(uname)-$(uname -m).sh -b -p $HOME/mambaforge
         echo 'export PATH="$HOME/mambaforge/bin:$PATH"' >> $HOME/.bashrc 
         source $HOME/.bashrc 
@@ -19,12 +24,7 @@ tasks:
         python fixbug_vmtk.py 
         echo "......................................"
         echo "All denpendencies are installed successfully!!"
-      )
-    
-    # command: |
-    #   (
-
-    #     )
+        )
   # - name: demo
   #   init: gp sync-await bundle # wait for the above 'init' to finish
   #   command: |
